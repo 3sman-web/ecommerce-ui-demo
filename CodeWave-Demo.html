@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeWave - كود ويف | متجرك الشامل لكل شيء</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* ==============================================
+           CSS VARIABLES & THEME
+           ============================================== */
+        :root {
+            --color-primary: #1a1a2e;
+            --color-secondary: #16213e;
+            --color-accent: #e94560;
+            --color-accent-light: #ff6b8a;
+            --color-success: #06d6a0;
+            --color-white: #ffffff;
+            --color-light: #f8f9fa;
+            --color-gray-200: #dee2e6;
+            --color-gray-300: #ced4da;
+            --color-gray-400: #adb5bd;
+            --color-gray-500: #6c757d;
+            --color-gray-700: #343a40;
+            --color-dark: #0f0f0f;
+            
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Cairo', 'Tajawal', sans-serif;
+            
+            --space-xs: 0.5rem;
+            --space-sm: 0.75rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            --space-4xl: 6rem;
+            
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 20px;
+            --radius-full: 9999px;
+            
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+            
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* RESET */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--color-gray-700);
+            background: var(--color-white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--color-dark);
+        }
+
+        h2 { font-size: clamp(1.75rem, 4vw, 2.75rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: color var(--transition-base);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        ul { list-style: none; }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            background: var(--color-primary);
+            color: var(--color-white);
+            font-size: 0.875rem;
+            padding: var(--space-sm) 0;
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .top-bar-left, .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: var(--space-xs);
+        }
+
+        .language-switcher a {
+            color: rgba(255, 255, 255, 0.7);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-base);
+        }
+
+        .language-switcher a.active {
+            color: var(--color-white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .social-links a {
+            color: rgba(255, 255, 255, 0.7);
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-full);
+            background: rgba(255, 255, 255, 0.05);
+            transition: all var(--transition-base);
+        }
+
+        .social-links a:hover {
+            color: var(--color-white);
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* HEADER */
+        .main-header {
+            background: var(--color-white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: var(--space-lg) 0;
+        }
+
+        .header-content {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: var(--space-xl);
+        }
+
+        .logo h1 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+        }
+
+        .logo .tagline {
+            display: block;
+            font-size: 0.75rem;
+            font-family: var(--font-body);
+            font-weight: 400;
+            opacity: 0.6;
+            margin-top: var(--space-xs);
+            color: var(--color-gray-500);
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .search-input-group {
+            position: relative;
+            display: flex;
+        }
+
+        .search-input-group input {
+            width: 100%;
+            padding: var(--space-md) var(--space-lg);
+            padding-left: 50px;
+            border: 2px solid var(--color-gray-200);
+            border-radius: var(--radius-full);
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            transition: all var(--transition-base);
+            background: var(--color-light);
+        }
+
+        .search-input-group input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            background: var(--color-white);
+            box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            left: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: var(--radius-full);
+            background: var(--color-accent);
+            color: var(--color-white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-base);
+        }
+
+        .search-btn:hover {
+            background: var(--color-accent-light);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .header-action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            color: var(--color-gray-700);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            position: relative;
+        }
+
+        .header-action-btn:hover {
+            background: var(--color-light);
+            color: var(--color-accent);
+        }
+
+        .header-action-btn i {
+            font-size: 1.5rem;
+        }
+
+        .header-action-btn .label {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .header-action-btn .badge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 var(--space-xs);
+            background: var(--color-accent);
+            color: var(--color-white);
+            border-radius: var(--radius-full);
+            font-size: 0.625rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* NAVIGATION */
+        .main-nav {
+            background: var(--color-secondary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xs);
+        }
+
+        .nav-menu > li > a {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-lg);
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            transition: all var(--transition-base);
+            border-radius: var(--radius-md);
+        }
+
+        .nav-menu > li > a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--color-white);
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: var(--space-4xl);
+        }
+
+        .hero-slide {
+            height: 600px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #C9A563 0%, #F5E6D3 100%);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: var(--space-3xl);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: var(--space-sm) var(--space-lg);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-full);
+            color: var(--color-white);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--color-white);
+            margin-bottom: var(--space-lg);
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-2xl);
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-white);
+            box-shadow: 0 4px 14px rgba(233, 69, 96, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4);
+        }
+
+        .btn-lg {
+            padding: var(--space-lg) var(--space-2xl);
+            font-size: 1.125rem;
+        }
+
+        .hero-shape {
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 50% 40% 60% 50%;
+            animation: morphing 20s ease-in-out infinite;
+        }
+
+        @keyframes morphing {
+            0%, 100% { border-radius: 50% 40% 60% 50%; }
+            25% { border-radius: 40% 60% 50% 40%; }
+            50% { border-radius: 60% 50% 40% 60%; }
+            75% { border-radius: 50% 60% 40% 50%; }
+        }
+
+        /* SECTIONS */
+        section {
+            padding: var(--space-4xl) 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+            border-radius: var(--radius-full);
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-gray-500);
+        }
+
+        /* CATEGORIES */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .category-card {
+            position: relative;
+            padding: var(--space-2xl);
+            border-radius: var(--radius-xl);
+            color: var(--color-white);
+            overflow: hidden;
+            transition: all var(--transition-base);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.2);
+            transition: background var(--transition-base);
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .category-icon {
+            position: relative;
+            font-size: 3rem;
+            margin-bottom: var(--space-lg);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+        }
+
+        .category-name {
+            position: relative;
+            font-size: 1.75rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        .category-description {
+            position: relative;
+            opacity: 0.9;
+            margin-bottom: var(--space-lg);
+        }
+
+        /* PRODUCTS */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .product-card {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-base);
+        }
+
+        .product-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-gray-400);
+            font-size: 3rem;
+        }
+
+        .product-info {
+            padding: var(--space-lg);
+        }
+
+        .product-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            color: var(--color-dark);
+        }
+
+        .product-rating {
+            display: flex;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-md);
+        }
+
+        .product-rating i {
+            color: #fbbf24;
+            font-size: 0.875rem;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            font-weight: 700;
+        }
+
+        .price-old {
+            color: var(--color-gray-400);
+            text-decoration: line-through;
+        }
+
+        .price-new {
+            color: var(--color-accent);
+            font-size: 1.375rem;
+        }
+
+        .btn-sm {
+            padding: var(--space-sm) var(--space-lg);
+            font-size: 0.875rem;
+            width: 100%;
+        }
+
+        /* FEATURES */
+        .features-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-2xl);
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: var(--space-xl);
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-base);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+            color: var(--color-white);
+            border-radius: var(--radius-full);
+            font-size: 2rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        /* FOOTER */
+        .main-footer {
+            background: var(--color-primary);
+            color: rgba(255, 255, 255, 0.8);
+            padding: var(--space-4xl) 0 var(--space-xl);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-3xl);
+            margin-bottom: var(--space-3xl);
+        }
+
+        .footer-title {
+            color: var(--color-white);
+            font-size: 1.25rem;
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: var(--space-xl);
+            text-align: center;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-shape {
+                display: none;
+            }
+
+            .categories-grid,
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-left">
+                    <span><i class="fas fa-phone"></i> support@codewave.com</span>
+                </div>
+                <div class="top-bar-right">
+                    <div class="language-switcher">
+                        <a href="#" class="active">العربية</a>
+                        <span>|</span>
+                        <a href="#">English</a>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="#">
+                        <h1>
+                            كود ويف
+                            <span class="tagline">متجرك الشامل لكل شيء</span>
+                        </h1>
+                    </a>
+                </div>
+                
+                <div class="search-bar">
+                    <div class="search-input-group">
+                        <input type="text" placeholder="ابحث عن المنتجات...">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="header-actions">
+                    <a href="#" class="header-action-btn">
+                        <i class="fas fa-heart"></i>
+                        <span class="badge">3</span>
+                        <span class="label">المفضلة</span>
+                    </a>
+                    
+                    <a href="#" class="header-action-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="badge">5</span>
+                        <span class="label">السلة</span>
+                    </a>
+                    
+                    <a href="#" class="header-action-btn">
+                        <i class="fas fa-user"></i>
+                        <span class="label">حسابي</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="#"><i class="fas fa-shirt"></i> الملابس والإكسسوارات</a></li>
+                <li><a href="#"><i class="fas fa-spa"></i> العناية اليومية</a></li>
+                <li><a href="#"><i class="fas fa-laptop-code"></i> المنتجات الرقمية</a></li>
+                <li><a href="#"><i class="fas fa-mobile-screen"></i> الإلكترونيات الصغيرة</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-slide">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <span class="hero-badge">جديد</span>
+                        <h1 class="hero-title">أزياء عصرية</h1>
+                        <p class="hero-description">
+                            اكتشف أحدث صيحات الموضة والإكسسوارات الأنيقة
+                        </p>
+                        <a href="#" class="btn btn-primary btn-lg">
+                            تسوق الآن <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </div>
+                    <div class="hero-image">
+                        <div class="hero-shape"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">جميع الأقسام</h2>
+                <p class="section-subtitle">تسوق حسب الفئة</p>
+            </div>
+            
+            <div class="categories-grid">
+                <a href="#" class="category-card" style="background: linear-gradient(135deg, #C9A563 0%, #F5E6D3 100%);">
+                    <div class="category-icon">
+                        <i class="fas fa-shirt"></i>
+                    </div>
+                    <h3 class="category-name">الملابس والإكسسوارات</h3>
+                    <p class="category-description">أجود الملابس والإكسسوارات العصرية</p>
+                </a>
+                
+                <a href="#" class="category-card" style="background: linear-gradient(135deg, #7FCDCD 0%, #E8F8F8 100%);">
+                    <div class="category-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3 class="category-name">العناية اليومية</h3>
+                    <p class="category-description">منتجات العناية بالجمال والصحة</p>
+                </a>
+                
+                <a href="#" class="category-card" style="background: linear-gradient(135deg, #9B59B6 0%, #E8DAEF 100%);">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="category-name">المنتجات الرقمية</h3>
+                    <p class="category-description">برامج، ألعاب، كورسات وكتب رقمية</p>
+                </a>
+                
+                <a href="#" class="category-card" style="background: linear-gradient(135deg, #2C3E50 0%, #FF6B35 100%);">
+                    <div class="category-icon">
+                        <i class="fas fa-mobile-screen"></i>
+                    </div>
+                    <h3 class="category-name">الإلكترونيات الصغيرة</h3>
+                    <p class="category-description">أجهزة إلكترونية ذكية ومستلزماتها</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">منتجات مميزة</h2>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-shirt"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">قميص رجالي كلاسيكي أبيض</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="product-price">
+                            <span class="price-old">299 ج.م</span>
+                            <span class="price-new">249 ج.م</span>
+                        </div>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-shopping-cart"></i> أضف للسلة
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">سماعة Sony WH-1000XM5</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="product-price">
+                            <span class="price-old">3,499 ج.م</span>
+                            <span class="price-new">3,299 ج.م</span>
+                        </div>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-shopping-cart"></i> أضف للسلة
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">FIFA 2025</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="product-price">
+                            <span class="price-old">599 ج.م</span>
+                            <span class="price-new">549 ج.م</span>
+                        </div>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-shopping-cart"></i> أضف للسلة
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-spray-can"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">عطر شانيل نمبر 5</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="product-price">
+                            <span class="price-old">1,499 ج.م</span>
+                            <span class="price-new">1,399 ج.م</span>
+                        </div>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-shopping-cart"></i> أضف للسلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3 class="feature-title">شحن سريع</h3>
+                    <p>توصيل سريع لجميع المحافظات</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">دفع آمن</h3>
+                    <p>معاملات آمنة ومشفرة</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo-alt"></i>
+                    </div>
+                    <h3 class="feature-title">إرجاع سهل</h3>
+                    <p>إرجاع واستبدال خلال 14 يوم</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title">دعم 24/7</h3>
+                    <p>خدمة عملاء على مدار الساعة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 class="footer-title">كود ويف</h3>
+                    <p>متجرك الإلكتروني الشامل الذي يوفر لك كل ما تحتاجه من منتجات عالية الجودة بأفضل الأسعار.</p>
+                </div>
+                
+                <div>
+                    <h3 class="footer-title">روابط سريعة</h3>
+                    <p>من نحن<br>اتصل بنا<br>سياسة الشحن<br>سياسة الإرجاع</p>
+                </div>
+                
+                <div>
+                    <h3 class="footer-title">الأقسام</h3>
+                    <p>الملابس<br>العناية اليومية<br>المنتجات الرقمية<br>الإلكترونيات</p>
+                </div>
+                
+                <div>
+                    <h3 class="footer-title">تواصل معنا</h3>
+                    <p>
+                        <i class="fas fa-phone"></i> +20 100 123 4567<br>
+                        <i class="fas fa-envelope"></i> support@codewave.com
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 كود ويف. جميع الحقوق محفوظة</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
